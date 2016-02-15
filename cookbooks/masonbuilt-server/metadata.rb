@@ -8,7 +8,7 @@ version          '0.1.0'
 
 depends 'postgresql', '~> 4.0.0'
 depends 'nginx'
-depends 'redis', '~> 3.0.4'
+# depends 'redis', '~> 3.0.4'
 depends 'rbenv', '~> 1.7.1'
 depends 'rubygems', '~> 0.3.0'
 depends 'ruby_build', '~> 0.8.0'

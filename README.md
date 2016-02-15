@@ -3,7 +3,7 @@
 1.  Set up new users (mason, deploy) aside from root
 2.  Put public key in authorized_keys for root, mason, and deploy
 3.  Change ssh port and disable root ssh login
-4.  Change project name references in `cookbooks/masonbuilt-cookbook/default/unicorn.erb` and `cookbooks/masonbuilt-cookbook/default/unicorn.erb`
+4.  Change project name references in `cookbooks/masonbuilt-server/default/unicorn.erb` and `cookbooks/masonbuilt-server/default/unicorn.erb`
 4.  Bootstrap node and run chef-client (see below)
 5.  Deploy with capistrano
 
@@ -23,7 +23,7 @@ Add:
 
 ```ruby
 "run_list": [
-  "recipe[masonbuilt-cookbook::default]"
+  "recipe[masonbuilt-server::default]"
 ]
 ```
 
@@ -33,6 +33,8 @@ Add:
 
 If cookbooks haven't been uploaded to the chef server yet, do that with:
 
-`knife cookbook upload [cookbook name]` starting with "masonbuilt-cookbook" and working backwards through dependency hell from there.
+`knife cookbook upload [cookbook name]` starting with "masonbuilt-server" and working backwards through dependency hell from there.
 
 NOTE: Redis has been removed for now - for being a PITA.
+
+web.json doesn't work but it's probably going to be used for the server recipe

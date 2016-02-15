@@ -1,4 +1,4 @@
-name             'masonbuilt-cookbook'
+name             'masonbuilt-vagrant'
 maintainer       'Michael Zemel'
 maintainer_email 'michael@masonbuilt.com'
 license          'WTFPL'
