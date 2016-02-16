@@ -40,9 +40,9 @@ end
 ########
 include_recipe "rbenv::default"
 include_recipe "rbenv::ruby_build"
-rbenv_ruby "2.1.2" do
-  ruby_version "2.1.2"
-  global "2.1.2"
+rbenv_ruby "2.2.3" do
+  ruby_version "2.2.3"
+  global "2.2.3"
 end
 
 ####################
@@ -51,12 +51,9 @@ end
 include_recipe 'rubygems'
 bash 'bundler-and-bash-profile-misc' do
   code <<-EOH
-echo "gem: --user-install" >> /home/vagrant/.gemrc
-export PATH=/home/vagrant/.gem/ruby/2.1.0/bin:$PATH
-echo "cd /var/www/sendero/current" >> /home/vagrant/.bash_profile
-source /home/vagrant/.bash_profile
+echo "gem: --user-install" >> /home/deploy/.gemrc
+export PATH=/home/deploy/.gem/ruby/2.2.0/bin:$PATH
 gem install bundler
-sudo chmod g+w /var/www/sendero/current/.git/FETCH_HEAD
   EOH
 end
 
@@ -85,13 +82,13 @@ template "/etc/init.d/unicorn" do
   source "unicorn.erb"
   mode "0755"
   action :create
-  owner "vagrant"
+  owner "deploy"
 end
 
 #######
 # SSH #
 #######
-template "/home/vagrant/.ssh/config" do
+template "/home/deploy/.ssh/config" do
   source "ssh-config.erb"
   action :create
 end
@@ -106,13 +103,9 @@ end
 #####################
 # Rest of the stuff #
 #####################
-bash "setup-the-app" do
+bash "misc" do
   code <<-EOH
-cd /var/www/sendero/current
-export PATH=/home/vagrant/.gem/ruby/2.1.0/bin:$PATH
+export PATH=/home/deploy/.gem/ruby/2.1.0/bin:$PATH
 export PATH=/opt/rbenv/versions/2.1.2/bin:$PATH
-bundle install
-bundle exec rake db:migrate
-bundle exec rake db:seed
   EOH
 end
